@@ -1,0 +1,224 @@
+                <meta charset="utf-8" emacsmode="-*- markdown -*-">
+                            **Your new prokaryotic CPU**
+
+
+Introduction
+===============================================================================
+
+A warm welcome to your new CPU! The Prokaryotic Cell is not quite like any
+CPU you will have worked with before, but many of the same principles apply.
+A micrometer long, weighing in at a picogram and consuming around a picowatt
+per megabyte of firmware, it is an impressive piece of technology.
+
+The Cell is a quaternary (base 4) system, so instead of bits with a value of    *********************
+0 and 1, we go all the way to 3. And unlike most other CPUs, in which 8 bits    * +-+-+-+-+-+-+-+-+ *
+make up a byte, in the Cell, 3 quaternary bits (or bases) make up a codon,      * |0|1|1|0|0|1|1|0| *
+which thus contains six bits.                                                   * +-+-+-+-+-+---+-+ *
+                                                                                *                   *                                                             
+                                                                                *   A typical byte  *
+                                                                                *                   *
+                                                                                *********************
+
+
+
+
+
+*********************In most computing architectures, bits are stored as voltages, electrical          
+*   +-+-+-+ +-+-+-+ *charges or shifts in magnetic orientations. In the Cell, each quaternary bit      
+*   |A|C|G| |G|G|T| *(base, from hereon) consists of 13 to 15 atoms.                                   
+*   +-+-+-+ +-+-+-+ *                                                                                  
+*                   *                                                                                   
+* Two typical codons*                                                                                  
+*********************                                                                                  
+
+
+In a traditional CPU, bits get stored like this:
+
+
+  Number| Symbol | Storage 
+ -------|------|----------
+    0   |  0   |   Low voltage, no charge, no phase transition
+    1   |  1   |   High voltage, charge, phase transition
+    [Traditional CPUs] 
+
+Whereas in DNA, the following table applies:
+
+  Number| Symbol | Storage 
+ -------|------|----------
+    0   |  A   |   Adenosine
+    1   |  C   |   Cytosine
+    2   |  G   |   Guanine
+    3   |  T/U |   Thymine/Uracil
+    [DNA/RNA storage] 
+
+
+Firmware
+--------
+The firmware of a typical simple cell consists of a few million bases. As
+each base encodes 2 bits, a fully functioning cell can therefore operate
+based on less than one megabyte of code.
+
+Unlike regular CPUs, in which the transistors are fixed and the microcode is
+not visible from the regular instruction set, the cell takes a more ‘Lisp’
+like approach where the code is the data is the CPU.
+
+In other words, the very architecture of the cell CPU is code, which can
+even be changed at runtime. 
+
+Hierarchies of storage
+======================
+Long term storage
+----------------------
+Like common computing systems, the prokaryotic cell has multiple kinds of
+storage. The basic firmware (called the genome) is stored as DNA, a single
+molecule string of millions of bases. 
+While DNA can be altered, it mostly isn’t. In this way, this ‘chromosome
+molecule’ functions a lot like Flash memory. Reading out DNA happens at
+about 60 bases/second, or 120bps. A full linear read of the genome would
+take around a day, but massive parallel access is available. In addition,
+bulk copies of DNA can be made at around 1000 bases/second, or 2kbps.
+
+
+Metric            | Harddisk   | Flash       | RAM         | DNA
+------------------|------------|-------------|-------------|-----
+Capacity          | Terabytes  | Gigabytes   | Gigabytes   | 100s of Megabytes
+Linear Read speed | 100s of Megabytes/s| Megabytes/s | Terabytes/s | 15 bytes/s
+Parallel reads    |    1       |      32     | 1           | 1000
+Parallel bandwidth| Megabytes/s| Gigabytes/s | Terabytes/s | 15 kbytes/s
+Bulk copy speed   | Megabytes/s| Gigabytes/s | Terabytes/s | 250 bytes/s
+[Various metrics for read speeds]
+
+Organisation of storage, content addressable memory
+---------------------------------------------------
+
+Within the ±megabyte of DNA there is organisation and metadata. While DNA is
+typically treated as linear storage when studied, and we denote interesting
+features by their offset in the genome, biologically DNA acts as content
+addressable memory. 
+
+This means that specific parts of DNA are retrieved based on their content,
+and not their position. This is feasible because of the tiny (physical) size
+of the genome (1–2 millimeters long loop, stored in &lt;3 cubic micrometers).
+
+Specific molecules can therefore rapidly bind to places that they are
+looking for.
+
+The genome consists of a few thousand clearly separated units called genes,
+containing a few kilobits of information on average. Some of these genes
+encode for the core functionality itself. The machinery to encode and read
+DNA is described in DNA, for example. This leads to obvious bootstrapping
+problems.
+
+In addition, although three bases together make up a codon (the ‘byte’),
+unlike traditional CPUs, the three bases are not physically tied up into a
+byte while stored. In other words, sub-byte addressing is possible, and
+starting at the wrong place leads to framing errors. 
+
+Active memory
+-------------
+Much like code from flash memory mostly has to be read into RAM before it
+can function, DNA has to be translated into RNA before it does anything. The
+translation to RNA removes some of the metadata which indicated where a gene
+begins and ends. As a gene is turned into a (loose) strand of RNA, it may
+become active directly. RNA molecules can perform functions themselves and
+interact with other pieces of DNA. 
+
+RNA can also be transcribed into other molecules (amino acids), and this is
+performed by the ribosomes.
+
+
+Opcodes
+==============
+Much like regular CPUs encode operations as opcodes, the cell maps codons to
+amino acids. Where an opcode operates on registers or locations in memory,
+amino acids are molecules that interact with other molecules to perform
+operations or to trigger further actions. The principle is the same however:
+a digital code gets mapped into operations that make things happen.
+
+There are 64 codons, but only 20 amino acids, so there is ample degeneracy
+in the mapping.  From the organization of the codon/amino acid mapping, it
+can be shown that it was highly likely that very early cells used only two
+bases per codon.  The third base was a later addition.  This can be compared
+to earlier 8 bit CPUs opcodes still being recognizable in current 64 bit
+microprocessors.
+
+Note that four codons are special:
+
+ * ATG is the START codon, and encodes within the linear DNA the start of a
+   new gene. Subsequent instances of ATG encode for Methionine
+ * TAA/TAG/TGA are the STOP codons, which indicate that a gene ends at this
+   location. Because the STOP must be unambigious, these codons do not also
+   encode for an amino acid.
+
+In the following table, the first two nucleotides of a codon are in the
+first column.  The final nucleotide is found in the following columns.  Note
+the odd sorting of the nucleotides (TCAG).  It turns out that our alphabetic
+ordering produces a more confusing table.  Orderered as TCAG, the whole
+table simplifies.
+
+
+Starter | T   | C   | A   | G
+--------|-----|-----|-----|---
+TT      |Phe  |Phe  |Leu  | Leu	
+TC      |Ser  |Ser  |Ser  | Ser	
+TA      |Tyr  |Tyr  |**STOP** | **STOP**
+TG      |Cys  |Cys  |**STOP** | Trp
+CT      |Leu  | Leu |Leu  | Leu	
+CC      |Pro  | Pro |Pro  | Pro	
+CA      |His  | His |GIn  | GIn	
+CG      |Arg  | Arg |Arg  | Arg	
+AT      |Lle  | Lle |LLe  | Met/**START**
+AC      |Thr  | Thr |Thr  | Thr	
+AA      |Asn  | Asn |Lys  | Lys
+AG      |Ser  | Ser |Arg  | Arg	
+GT      |Val  | Val |Val  | Val	
+GC      |Ala  | Ala |Ala  | Ala	
+GA      |Asp  | Asp |Glu  | Glu	
+GG      |Gly  | Gly |Gly  | Gly	
+[Prokaryotic codon / protein mapping]
+
+Compare this table to the opcodes of the venerable 6502 CPU which looks
+highly similar, including degeneracy. Here the first column describes the
+high nibble and the first bit of the low nibble. The remaining columns are
+the 3 final bits of the low nibble.
+
+.  |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  
+---|-----|-----|-----|-----|-----|-----|-----|-----
+0L | BRK | ORA | KIL | SLO | NOP | ORA | ASL | SLO 
+0H | PHP | ORA | ASL | ANC | NOP | ORA | ASL | SLO
+1L | BPL | ORA | KIL | SLO | NOP | ORA | ASL | SLO 
+1H | CLC | ORA | NOP | SLO | NOP | ORA | ASL | SLO
+2L | JSR | AND | KIL | RLA | BIT | AND | ROL | RLA 
+2H | PLP | AND | ROL | ANC | BIT | AND | ROL | RLA
+3L | BMI | AND | KIL | RLA | NOP | AND | ROL | RLA 
+3H | SEC | AND | NOP | RLA | NOP | AND | ROL | RLA
+4L | RTI | EOR | KIL | SRE | NOP | EOR | LSR | SRE 
+4H | PHA | EOR | LSR | ALR | JMP | EOR | LSR | SRT
+5L | BVC | EOR | KIL | SRE | NOP | EOR | LSR | SRE 
+5H | CLI | EOR | NOP | SRE | NOP | EOR | LSR | SRE
+6L | RTS | ADC | KIL | RRA | NOP | ADC | ROR | RRA 
+6H | PLA | ADC | ROR | ARR | JMP | ADC | ROR | RRA
+7L | BVS | ADC | KIL | RRA | NOP | ADC | ROR | RRA 
+7H | SEI | ADC | NOP | RRA | NOP | ADC | ROR | RRA
+8L | NOP | STA | NOP | SAX | STY | STA | STX | SAX 
+8H | DEY | NOP | TXA | XAA | STY | STA | STX | SAX
+9L | BCC | STA | KIL | AHX | STY | STA | STX | SAX 
+9H | TYA | STA | TXS | TAS | SHY | STA | SHX | AHX
+AL | LDY | LDA | LDX | LAX | LDY | LDA | LDX | LAX 
+AH | TAY | LDA | TAX | LAX | LDY | LDA | LDX | LAX
+BL | BCS | LDA | KIL | LAX | LDY | LDA | LDX | LAX 
+BH | CLV | LDA | TSX | LAS | LDY | LDA | LDX | LAX
+CL | CPY | CMP | NOP | DCP | CPY | CMP | DEC | DCP 
+CH | INY | CMP | DEX | AXS | CPY | CMP | DEC | DCP
+DL | BNE | CMP | KIL | DCP | NOP | CMP | DEC | DCP 
+DH | CLD | CMP | NOP | DCP | NOP | CMP | DEC | DCP
+EL | CPX | SBC | NOP | ISC | CPX | SBC | INC | ISC
+EH | INX | SBC | NOP | SBC | CPX | SBC | INC | ISC
+FL | BEQ | SBC | KIL | ISC | NOP | SBC | INC | ISC 
+FH | SED | SBC | NOP | ISC | NOP | SBC | INC | ISC
+[6502 opcode mapping]
+
+
+
+
+<!--  Markdeep:  --><style  class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script  src="markdeep.min.js"></script><script  src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>

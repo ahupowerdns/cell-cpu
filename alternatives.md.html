@@ -1,0 +1,21 @@
+.  |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  A  |  B  |  C  |  D  |  E  | F
+---|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|----
+0  | BRK | ORA | KIL | SLO | NOP | ORA | ASL | SLO | PHP | ORA | ASL | ANC | NOP | ORA | ASL | SLO
+1  | BPL | ORA | KIL | SLO | NOP | ORA | ASL | SLO | CLC | ORA | NOP | SLO | NOP | ORA | ASL | SLO
+2  | JSR | AND | KIL | RLA | BIT | AND | ROL | RLA | PLP | AND | ROL | ANC | BIT | AND | ROL | RLA
+3  | BMI | AND | KIL | RLA | NOP | AND | ROL | RLA | SEC | AND | NOP | RLA | NOP | AND | ROL | RLA
+4  | RTI | EOR | KIL | SRE | NOP | EOR | LSR | SRE | PHA | EOR | LSR | ALR | JMP | EOR | LSR | SRT
+5  | BVC | EOR | KIL | SRE | NOP | EOR | LSR | SRE | CLI | EOR | NOP | SRE | NOP | EOR | LSR | SRE
+6  | RTS | ADC | KIL | RRA | NOP | ADC | ROR | RRA | PLA | ADC | ROR | ARR | JMP | ADC | ROR | RRA
+7  | BVS | ADC | KIL | RRA | NOP | ADC | ROR | RRA | SEI | ADC | NOP | RRA | NOP | ADC | ROR | RRA
+8  | NOP | STA | NOP | SAX | STY | STA | STX | SAX | DEY | NOP | TXA | XAA | STY | STA | STX | SAX
+9  | BCC | STA | KIL | AHX | STY | STA | STX | SAX | TYA | STA | TXS | TAS | SHY | STA | SHX | AHX
+A  | LDY | LDA | LDX | LAX | LDY | LDA | LDX | LAX | TAY | LDA | TAX | LAX | LDY | LDA | LDX | LAX
+B  | BCS | LDA | KIL | LAX | LDY | LDA | LDX | LAX | CLV | LDA | TSX | LAS | LDY | LDA | LDX | LAX
+C  | CPY | CMP | NOP | DCP | CPY | CMP | DEC | DCP | INY | CMP | DEX | AXS | CPY | CMP | DEC | DCP
+D  | BNE | CMP | KIL | DCP | NOP | CMP | DEC | DCP | CLD | CMP | NOP | DCP | NOP | CMP | DEC | DCP
+E  | CPX | SBC | NOP | ISC | CPX | SBC | INC | ISC | INX | SBC | NOP | SBC | CPX | SBC | INC | ISC
+F  | BEQ | SBC | KIL | ISC | NOP | SBC | INC | ISC | SED | SBC | NOP | ISC | NOP | SBC | INC | ISC
+[a6502 opcode mapping]
+
+<!--  Markdeep:  --><style  class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script  src="markdeep.min.js"></script><script  src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
